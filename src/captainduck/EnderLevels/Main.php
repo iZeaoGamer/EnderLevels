@@ -36,12 +36,12 @@ class Main extends PluginBase implements Listener{
     public function onCommand(CommandSender $sender, Command $command, $label, array $args) : bool{
         switch (strtolower($command->getName())) {
             case "stats":
-            $sender->sendMessage(C::ITALIC. C::GRAY. "----------- ". C::WHITE. "Your Stats: ". C::GRAY. "-----------");
-            $sender->sendMessage(C::ITALIC. "Level: ". $this->getLevel($sender). " ");
-            $sender->sendMessage(C::ITALIC. "Exp: ". $this->getExp($sender)."/".$this->getExpNeededTLU($sender). " ");
-            $sender->sendMessage(C::ITALIC. "Kills: ". $this->getKills($sender). " ");
-            $sender->sendMessage(C::ITALIC. "Deaths: ". $this->getDeaths($sender). " ");
-            $sender->sendMessage(C::ITALIC. C::GRAY. "---------------------------------");
+            $sender->sendMessage(C::colorize("&3----------- &b&lYour Stats: &r&3-----------"));
+            $sender->sendMessage(C::colorize("&dLevel: &5". $this->getLevel($sender). " "));
+            $sender->sendMessage(C::colorize("&dExp: &5". $this->getExp($sender)."&6/&5".$this->getExpNeededTLU($sender). " "));
+            $sender->sendMessage(C::colorize("&dKills: &5". $this->getKills($sender). " "));
+            $sender->sendMessage(C::colorize("&dDeaths: &5". $this->getDeaths($sender). " "));
+            $sender->sendMessage(C::colorize("&3---------------------------------"));
             break;
 
             case "levelup":
@@ -61,8 +61,8 @@ class Main extends PluginBase implements Listener{
                 return true;
                 break;
             }
-
-            case "enchantshop":
+        }
+            /*case "enchantshop": Coming soon
             if($this->getLevel($sender) >= 20){
                 $sender->teleport($sender->getServer()->getLevelByName("EnchantShop")->getSpawnLocation());
                 $sender->sendMessage(C::ITALIC. "Teleported to the Enchant Shop!");
@@ -74,7 +74,7 @@ class Main extends PluginBase implements Listener{
         }
         return true;
     }
-
+*/
     ###########################################################################
     ########################### IMPORTANT API #################################
     ###########################################################################
@@ -83,14 +83,14 @@ class Main extends PluginBase implements Listener{
         $exp = $this->getExp($player);
         $expn = $this->getExpNeededTLU($player);
         if($this->getLevel($player) == 30){
-            $player->sendMessage(C::ITALIC. C::RED. "You have already reached the max level, silly!");
+            $player->sendMessage(C::colorize("&cYou have already reached the max level! You're on level: " . $this->getLevel($player));
         }
         if($exp >= $expn){
             $this->levelUp($player);
             $this->reduceExp($player, $expn);
             $this->setNamedTag($player);
             $this->addExpNeededTLU($player, $expn * 1);
-            $player->sendMessage(C::ITALIC. "Successfully leveled up to ". $this->getLevel($player). "!");
+            $player->sendMessage(C::colorize("&bSuccessfully leveled up to &3". $this->getLevel($player). "&b!"));
         }else{
             $player->sendMessage(C::ITALIC. C::RED. "You don't have enough experience to level up!");
         }
@@ -100,7 +100,7 @@ class Main extends PluginBase implements Listener{
         $this->stats->setNested(strtolower($player->getName()).".lvl", $this->stats->getAll()[strtolower($player->getName())]["lvl"] + 1);
         $this->stats->save();
         $this->setNamedTag($player);
-        $this->getServer()->broadcastMessage(C::ITALIC. $player->getName(). " is now level ". $this->getLevel($player). "!");
+        $this->getServer()->broadcastMessage(C::colorize("&5" . $player->getName(). " &dis now level &5". $this->getLevel($player). "&d!");
     }
 
     public function setNamedTag($player){
