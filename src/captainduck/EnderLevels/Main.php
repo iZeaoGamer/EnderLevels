@@ -202,6 +202,13 @@ class Main extends PluginBase implements Listener{
 
     public function addExpPlace(BlockPlaceEvent $e){
         $pn = $e->getPlayer()->getName();
+        $p = $ev->getPlayer();
+        $sb = Server::getInstance()->getPluginManager()->getPlugin("SkyBlock");
+       // $sm = $sb->getSessionManager();
+     //   $s = $sm->getSession($p);
+        $im = $sb->getIslandManager();
+        $isle = $im->getIsle($p->getLevel()->getName());
+        if($sb->$sb->getIslandManager()->$im->getIsle($p->getLevel()->getName() !== null){
         $this->addExp($pn, 5);
     }
 }
