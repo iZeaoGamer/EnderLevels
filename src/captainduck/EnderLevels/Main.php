@@ -197,7 +197,15 @@ class Main extends PluginBase implements Listener{
         $im = $sb->getIslandManager();
         $isle = $im->getIsle($p->getLevel()->getName());
         if($sb->$sb->getIslandManager()->$im->getIsle($p->getLevel()->getName() !== null){
+            $exp = $this->getExp($p);
+        $expn = $this->getExpNeededTLU($p);
         $this->addExp($pn, 5);
+        } elseif($exp >= $expn){
+            $this->levelUp($p);
+            $this->reduceExp($p, $expn);
+            $this->setNamedTag($p);
+            $this->addExpNeededTLU($p, $expn * 1);
+                $p->addTitle("§6§lIsland level up", "§b§l" . $this->getLevel($p);
     }
 
     public function addExpPlace(BlockPlaceEvent $e){
@@ -210,5 +218,15 @@ class Main extends PluginBase implements Listener{
         $isle = $im->getIsle($p->getLevel()->getName());
         if($sb->$sb->getIslandManager()->$im->getIsle($p->getLevel()->getName() !== null){
         $this->addExp($pn, 5);
+        } else {
+            $exp = $this->getExp($p);
+        $expn = $this->getExpNeededTLU($p);
+            if($exp >= $expn){
+            $this->levelUp($p);
+            $this->reduceExp($p, $expn);
+            $this->setNamedTag($p);
+            $this->addExpNeededTLU($p, $expn * 1);
+                $p->addTitle("§6§lIsland level up", "§b§l" . $this->getLevel($p);
+    }
     }
 }
