@@ -82,7 +82,7 @@ class Main extends PluginBase implements Listener{
     public function initializeLevel($player){
         $exp = $this->getExp($player);
         $expn = $this->getExpNeededTLU($player);
-        if($this->getLevel($player) == 30){
+        if($this->getLevel($player) == 100){
             $player->sendMessage(C::ITALIC. C::RED. "You have already reached the max level, silly!");
         }
         if($exp >= $expn){
@@ -190,6 +190,13 @@ class Main extends PluginBase implements Listener{
 
     public function addExpBreak(BlockBreakEvent $e){
         $pn = $e->getPlayer()->getName();
+        $p = $ev->getPlayer();
+        $sb = Server::getInstance()->getPluginManager()->getPlugin("SkyBlock");
+       // $sm = $sb->getSessionManager();
+     //   $s = $sm->getSession($p);
+        $im = $sb->getIslandManager();
+        $isle = $im->getIsle($p->getLevel()->getName());
+        if($sb->$sb->getIslandManager()->$im->getIsle($p->getLevel()->getName() !== null){
         $this->addExp($pn, 5);
     }
 
